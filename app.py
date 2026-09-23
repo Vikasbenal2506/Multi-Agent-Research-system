@@ -7,9 +7,9 @@ import streamlit as st
 try:
     for key, value in st.secrets.items():
         if isinstance(value, str):
-            os.environ.setdefault(key, value)
+            os.environ[key] = value.strip()
 except Exception:
-    pass  # no secrets file locally; falls back to .env
+    pass
 
 from agents import build_reader_agent, build_search_agent, writer_chain, critic_chain
 from pipeline import message_text
